@@ -24,3 +24,13 @@ model =tf.keras.models.Sequential([
 
 model.compile(optimizer='adam',loss='sparse_categorical_crossentropy',metrics=['accuracy'])
 model.fit(training_images,training_labels,epochs=10,callbacks=callbacks)
+
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+train_datagen = ImageDataGenerator(rescale=1/255)
+
+train_generator = train_datagen.flow_from_directory(
+        "/tmp/h-or-s",
+        target_size=(150, 150),
+        batch_size=10,
+        class_mode='binary')
